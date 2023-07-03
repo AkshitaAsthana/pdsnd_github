@@ -26,15 +26,12 @@ git clone https://github.com/AkshitaAsthana/pdsnd_github
 3. Open a terminal or command prompt and navigate to the directory where you cloned the repository.
 
 4. Run the following command to execute the script:
-
-```shell
 python bikeshare.py
+
 5. Follow the prompts to select a city, apply filters (if desired), and view the statistics and raw data.
 The script will provide interactive output based on your selections.
 
 6. To exit the script, simply press Ctrl+C in the terminal or command promp
-
-
 
 ## Credits
 
