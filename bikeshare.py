@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 MONTHS = {
     1: 'January',
     2: 'February',
@@ -89,63 +88,119 @@ def display_data(df):
         else:
             print("Invalid input. Please try again.")
 
-def calculate_statistics(df):
+def calculate_popular_times(df):
     """
-    Calculate and display the statistics based on the filtered data.
+    Calculate and display the popular times of travel.
     """
-    # 1. Popular times of travel
     print("1. Popular times of travel:")
-    # Most common month
+    calculate_most_common_month(df)
+    calculate_most_common_day(df)
+    calculate_most_common_hour(df)
+
+def calculate_most_common_month(df):
+    """
+    Calculate and display the most common month.
+    """
     popular_month = df['Start Time'].dt.month.mode()[0]
     print("   Most common month:", MONTHS[popular_month])
 
-    # Most common day of week
+def calculate_most_common_day(df):
+    """
+    Calculate and display the most common day of week.
+    """
     popular_day = df['Start Time'].dt.day_name().mode()[0]
     print("   Most common day of week:", popular_day)
 
-    # Most common hour of day
+def calculate_most_common_hour(df):
+    """
+    Calculate and display the most common hour of day.
+    """
     popular_hour = df['Start Time'].dt.hour.mode()[0]
     print("   Most common hour of day:", popular_hour)
 
-    # 2. Popular stations and trips
+def calculate_popular_stations_trips(df):
+    """
+    Calculate and display the popular stations and trips.
+    """
     print("2. Popular stations and trips:")
-    # Most common start station
+    calculate_most_common_start_station(df)
+    calculate_most_common_end_station(df)
+    calculate_most_common_trip(df)
+
+def calculate_most_common_start_station(df):
+    """
+    Calculate and display the most common start station.
+    """
     popular_start_station = df['Start Station'].mode()[0]
     print("   Most common start station:", popular_start_station)
 
-    # Most common end station
+def calculate_most_common_end_station(df):
+    """
+    Calculate and display the most common end station.
+    """
     popular_end_station = df['End Station'].mode()[0]
     print("   Most common end station:", popular_end_station)
 
-    # Most common trip from start to end
+def calculate_most_common_trip(df):
+    """
+    Calculate and display the most common trip from start to end.
+    """
     df['Trip'] = df['Start Station'] + ' to ' + df['End Station']
     popular_trip = df['Trip'].mode()[0]
     print("   Most common trip from start to end:", popular_trip)
 
-    # 3. Trip duration
+def calculate_trip_duration(df):
+    """
+    Calculate and display the trip duration.
+    """
     print("3. Trip duration:")
-    # Total travel time
+    calculate_total_travel_time(df)
+    calculate_average_travel_time(df)
+
+def calculate_total_travel_time(df):
+    """
+    Calculate and display the total travel time.
+    """
     total_travel_time = df['Trip Duration'].sum()
     print("   Total travel time:", total_travel_time)
 
-    # Average travel time
+def calculate_average_travel_time(df):
+    """
+    Calculate and display the average travel time.
+    """
     average_travel_time = df['Trip Duration'].mean()
     print("   Average travel time:", average_travel_time)
 
-    # 4. User info
+def calculate_user_info(df):
+    """
+    Calculate and display the user information.
+    """
     print("4. User info:")
-    # Count of each user type
+    calculate_user_type_counts(df)
+    calculate_gender_counts(df)
+    calculate_birth_year_info(df)
+
+def calculate_user_type_counts(df):
+    """
+    Calculate and display the count of each user type.
+    """
     user_type_counts = df['User Type'].value_counts()
     print("   Counts of each user type:")
     print(user_type_counts)
 
-    # Count of each gender (if available)
+def calculate_gender_counts(df):
+    """
+    Calculate and display the count of each gender (if available).
+    """
     if 'Gender' in df.columns:
         gender_counts = df['Gender'].value_counts()
         print("   Counts of each gender:")
         print(gender_counts)
 
-    # Earliest, most recent, and most common year of birth (if available)
+def calculate_birth_year_info(df):
+    """
+    Calculate and display the earliest, most recent, and most common birth years (if available).
+    """
     if 'Birth Year' in df.columns:
         earliest_birth_year = df['Birth Year'].min()
         most_recent_birth_year = df['Birth Year'].max()
@@ -181,7 +236,10 @@ def main():
         df = df[df['Start Time'].dt.day_name() == day]
 
     # Calculate and display statistics
-    calculate_statistics(df)
+    calculate_popular_times(df)
+    calculate_popular_stations_trips(df)
+    calculate_trip_duration(df)
+    calculate_user_info(df)
 
     # Display raw data if requested by the user
     display_data(df)
