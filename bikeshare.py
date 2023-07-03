@@ -1,7 +1,6 @@
 import pandas as pd
 
-
-MONTHS = {
+months = {
     1: 'January',
     2: 'February',
     3: 'March',
@@ -16,9 +15,9 @@ def get_city():
     """
     cities = ['chicago', 'new york', 'washington']
     while True:
-        city = input("Please select a city (Chicago, New York, or Washington): ").lower()
-        if city in cities:
-            return city
+        city_name = input("Please select a city (Chicago, New York, or Washington): ").lower()
+        if city_name in cities:
+            return city_name
         else:
             print("Invalid city. Please try again.")
 
@@ -64,14 +63,14 @@ def display_data(df):
     """
     start_idx = 0
     while True:
-        display = input("Would you like to see the raw data? (yes or no): ").lower()
-        if display == 'yes':
+        display_choice = input("Would you like to see the raw data? (yes or no): ").lower()
+        if display_choice == 'yes':
             print(df.iloc[start_idx:start_idx+5])
             start_idx += 5
             if start_idx >= len(df):
                 print("No more data to display.")
                 break
-        elif display == 'no':
+        elif display_choice == 'no':
             break
         else:
             print("Invalid input. Please try again.")
@@ -84,7 +83,7 @@ def calculate_statistics(df):
     print("1. Popular times of travel:")
     # Most common month
     popular_month = df['Start Time'].dt.month.mode()[0]
-    print("   Most common month:", MONTHS[popular_month])
+    print("   Most common month:", months[popular_month])
 
     # Most common day of week
     popular_day = df['Start Time'].dt.day_name().mode()[0]
@@ -143,13 +142,13 @@ def calculate_statistics(df):
 
 def main():
     # Get user input
-    city = get_city()
+    city_name = get_city()
     filter_choice = get_filter()
     month = None
     day = None
 
     # Load the data
-    filename = city.replace(" ", "_").lower() + ".csv"
+    filename = city_name.replace(" ", "_").lower() + ".csv"
     try:
         df = pd.read_csv(filename)
     except FileNotFoundError:
