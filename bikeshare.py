@@ -12,7 +12,19 @@ MONTHS = {
 
 def get_city():
     """
-    Prompt the user to select a city.
+    Prompt the user to select a city for bikeshare analysis.
+
+    Returns:
+        str: The selected city name (Chicago, New York, or Washington).
+
+    Usage:
+        The function prompts the user to enter a city name as input (case-insensitive). It validates the input against a list of available cities (Chicago, New York, and Washington) and returns the selected city.
+
+    Example:
+        >>> city = get_city()
+        Please select a city (Chicago, New York, or Washington): chicago
+        >>> print(city)
+        chicago
     """
     cities = ['chicago', 'new york', 'washington']
     while True:
@@ -21,6 +33,7 @@ def get_city():
             return city
         else:
             print("Invalid city. Please try again.")
+
 
 def get_filter():
     """
